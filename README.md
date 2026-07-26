@@ -1,4 +1,4 @@
-# Prompt Chaining with Groq LLM
+# Prompt Chaining
 
 This project demonstrates the concept of **Prompt Chaining**, where a complex task is broken down into multiple smaller prompts. Each prompt performs a specific task, and its output is passed as input to the next prompt.
 
@@ -165,7 +165,3 @@ Through this project, you will understand:
 - Writing effective system and user prompts.
 - Using the Groq API for multiple LLM calls.
 - Building modular AI applications.
-
----
-
-Learning Generative AI concepts through hands-on projects.
