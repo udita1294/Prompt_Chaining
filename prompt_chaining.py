@@ -62,3 +62,14 @@ def step2_jd_analysis():
         """
     user_prompt = """Extract skills from this job description: {JD}"""
     return ask_llm(system_prompt, user_prompt)
+
+def step2_match(candidate,jd):
+    system_prompt = """
+            You are a professional HR assistant. Compare the skills of the candidate and the skills required fro the JD and produce a final 
+            score between 0 to 100. Also produce a short verdict whether the candidate is a good fit for this role or not.
+            Do not invent any skills by yourself.
+            """
+    user_prompt = """compare and match the skills
+            Job Description:{JD}
+            Candidate Resume:{RESUME}
+            """
