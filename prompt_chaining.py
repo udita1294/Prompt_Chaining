@@ -2,6 +2,7 @@ import os
 from dotenv import load_dotenv
 from pathlib import Path
 from groq import Groq
+from time import sleep
 
 load_dotenv()
 my_api_key = os.getenv("GROQ_API_KEY")
@@ -52,7 +53,7 @@ def step1_resume_extraction():
         You are a professional HR assistant. Extract skills from the candidate resume provided. Only extract the skills no other information.
         Do not invent any skills by yourself.
         """
-    user_prompt = """Extract skills from this resume: {RESUME}"""
+    user_prompt = f"""Extract skills from this resume: {RESUME}"""
     return ask_llm(system_prompt, user_prompt)
 
 def step2_jd_analysis():
@@ -60,7 +61,7 @@ def step2_jd_analysis():
         You are a professional HR assistant. Extract skills from the Job Description provided. Only extract the skills no other information.
         Do not invent any skills by yourself.
         """
-    user_prompt = """Extract skills from this job description: {JD}"""
+    user_prompt = f"""Extract skills from this job description: {JD}"""
     return ask_llm(system_prompt, user_prompt)
 
 def step2_match(candidate,jd):
@@ -69,7 +70,16 @@ def step2_match(candidate,jd):
             score between 0 to 100. Also produce a short verdict whether the candidate is a good fit for this role or not.
             Do not invent any skills by yourself.
             """
-    user_prompt = """compare and match the skills
-            Job Description:{JD}
-            Candidate Resume:{RESUME}
+    user_prompt = f"""compare and match the skills
+            Job Description:{JD_skills}
+            Candidate :{Candidate}
             """
+    return ask_llm(system_prompt, user_prompt)
+
+
+Candidate = step1_resume_extraction()
+sleep(2)
+JD_skills = step2_jd_analysis()
+sleep(2)
+match_result = step2_match(Candidate, JD_skills)
+print("Result : ", match_result)
