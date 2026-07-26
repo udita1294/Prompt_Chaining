@@ -60,6 +60,8 @@ def step2_jd_analysis():
     system_prompt = """
         You are a professional HR assistant. Extract skills from the Job Description provided. Only extract the skills no other information.
         Do not invent any skills by yourself.
+        Output Format:
+        Skills should be separated by commas. Just return comma separated skills do not return any other filler information
         """
     user_prompt = f"""Extract skills from this job description: {JD}"""
     return ask_llm(system_prompt, user_prompt)
@@ -69,6 +71,8 @@ def step2_match(candidate,jd):
             You are a professional HR assistant. Compare the skills of the candidate and the skills required fro the JD and produce a final 
             score between 0 to 100. Also produce a short verdict whether the candidate is a good fit for this role or not.
             Do not invent any skills by yourself.
+            Output Format:
+            Skills should be separated by commas. Just return comma separated skills do not return any other filler information
             """
     user_prompt = f"""compare and match the skills
             Job Description:{JD_skills}
